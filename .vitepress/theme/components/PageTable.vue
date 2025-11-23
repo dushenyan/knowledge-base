@@ -2,8 +2,8 @@
 import type { DocsTreeData } from '@theme/hooks/useDocsTreeData'
 import { getTitleSet, useDocsTreeData } from '@theme/hooks/useDocsTreeData'
 import { EmitType, useEmits } from '@theme/hooks/useEmits'
-import { useRouter } from 'vitepress'
-import { computed, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vitepress'
+import { ref, watch } from 'vue'
 import { supabase } from '@/request'
 import { useAppStore } from '@/stores'
 
@@ -21,11 +21,24 @@ interface Props {
   activeName?: string
 }
 
+const route = useRoute()
 const router = useRouter()
+
 const appStore = useAppStore()
 
 const titleSet = getTitleSet()
-const _activeName = ref<string | undefined>(appStore.getActiveName || [...titleSet][0])
+
+// 从路由查询参数中获取 name 字段
+function getRouteName(): string | undefined {
+  if (typeof window === 'undefined')
+    return undefined
+
+  const urlParams = new URLSearchParams(window.location.search)
+  const name = urlParams.get('name')
+  return name || undefined
+}
+
+const _activeName = ref<string | undefined>(getRouteName() || [...titleSet][0])
 const computedTree = ref<DocsTreeData>(undefined)
 
 function navigateToPage(path?: string) {
@@ -43,11 +56,14 @@ watch(() => props.activeName, (val) => {
   immediate: true,
 })
 
-// 外部携带的 activeName 不需要展示tab
-const showTabs = computed(() => {
-  // 1.activeName 没赋值 可以显示
-  // 2.赋值了但是不等于undefined 单显示状态 不用显示
-  return !props.activeName
+// 监听路由变化，更新 _activeName
+watch(() => route.path, () => {
+  const routeName = getRouteName()
+  if (routeName) {
+    _activeName.value = routeName
+  }
+}, {
+  immediate: true,
 })
 
 watch(() => _activeName.value, () => {
@@ -63,9 +79,6 @@ watch(() => _activeName.value, () => {
 
 <template>
   <div class="page-table">
-    <el-tabs v-if="showTabs" v-model="_activeName">
-      <el-tab-pane v-for="name in titleSet" :key="name" :label="name.toUpperCase()" :name="name" />
-    </el-tabs>
     <ul class="page-table-list">
       <li
         v-for="item in computedTree" :key="item.title" class="page-table-item" tabindex="0"
@@ -94,10 +107,6 @@ watch(() => _activeName.value, () => {
 .page-table {
   margin: 15px auto 60px;
   max-width: 85vw;
-
-  :deep(.el-tabs__nav-wrap::after) {
-    display: none;
-  }
 
   h1 {
     font-size: 24px;

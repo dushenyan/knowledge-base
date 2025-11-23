@@ -39,7 +39,7 @@ export const nav = [
   },
   {
     text: '技术集合',
-    link: '/docs/index',
-    // items: getJiShuJiHe(),
+    // link: '/docs/index',
+    items: getJiShuJiHe(),
   },
 ]

@@ -2,6 +2,7 @@
 import type { Zoom } from 'medium-zoom'
 import type { SandpackPredefinedTemplate } from '../types'
 import { sandpackTemplateOptions } from '@config/emnus'
+import { Edit, List } from '@element-plus/icons-vue'
 import HomeUnderline from '@theme/components/HomeUnderline'
 import LockScreen from '@theme/components/LockScreen.vue'
 import { EmitType, useEmits } from '@theme/hooks/useEmits'
@@ -109,10 +110,14 @@ const sandpackTemplateValue = ref<SandpackPredefinedTemplate>('vite')
     <Layout v-bind="$attrs">
       <template #doc-top>
         <div class="fixed-edit-btn" style="bottom: 160px;" @click="handleClick($event, 'list')">
-          List
+          <el-icon size="24">
+            <List />
+          </el-icon>
         </div>
         <div class="fixed-edit-btn" @click="handleClick($event, 'edit')">
-          Edit
+          <el-icon size="24">
+            <Edit />
+          </el-icon>
         </div>
         <el-drawer
           v-model="showEditDrawer" :with-header="false" append-to-body :close-on-click-modal="false"
@@ -163,6 +168,9 @@ const sandpackTemplateValue = ref<SandpackPredefinedTemplate>('vite')
 }
 
 .fixed-edit-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   right: 40px;
   bottom: 100px;
