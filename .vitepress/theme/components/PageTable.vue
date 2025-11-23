@@ -105,7 +105,7 @@ watch(() => _activeName.value, () => {
 
 <style scoped lang="scss">
 .page-table {
-  margin: 15px auto 60px;
+  margin: 60px auto;
   max-width: 85vw;
 
   h1 {

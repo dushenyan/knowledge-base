@@ -519,11 +519,6 @@
     "link": "%2Fdocs%2FPromise"
   },
   {
-    "title": "RandomQuestions",
-    "items": [],
-    "link": "%2Fdocs%2FRandomQuestions"
-  },
-  {
     "title": "TypeScript",
     "items": [
       {
@@ -1200,6 +1195,24 @@
       }
     ],
     "link": "%2Fdocs%2Fother"
+  },
+  {
+    "title": "random-questions",
+    "metadata": {
+      "layout": "home",
+      "layoutClass": "home-layout",
+      "sidebar": false,
+      "editLink": false,
+      "footer": false,
+      "notArticle": true,
+      "outline": [
+        2,
+        3,
+        4
+      ]
+    },
+    "link": "%2Fdocs%2Frandom-questions",
+    "fileExtension": ".md"
   },
   {
     "title": "编码规范",

@@ -46,7 +46,7 @@ const vitePressOptions: UserConfig = withMermaid({
       },
       {
         icon: 'github',
-        link: 'https://github.com/dushenyan/mainshibaodian',
+        link: 'https://github.com/dushenyan',
       },
     ],
     lightModeSwitchTitle: '切换浅色',
