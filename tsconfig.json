@@ -1,32 +1,22 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
     "target": "ESNext",
-    "useDefineForClassFields": true,
-    "module": "preserve",
-    "moduleResolution": "bundler",
-    "strict": true,
-    "sourceMap": true,
-    "resolveJsonModule": true,
-    "allowJs": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
     "jsx": "preserve",
     "jsxImportSource": "vue",
-    "forceConsistentCasingInFileNames": true,
     "lib": [
       "ESNext",
       "DOM"
     ],
-    "typeRoots": [
-      "node_modules/@types",
-      "@types",
-      "types/*"
-    ],
+    "useDefineForClassFields": true,
+    "baseUrl": "./",
+    "module": "preserve",
+    "moduleResolution": "bundler",
     "paths": {
       "@config/*": [
         ".vitepress/config/*"
+      ],
+      "@dist/*": [
+        ".vitepress/dist/*"
       ],
       "@layout/*": [
         ".vitepress/layout/*"
@@ -46,10 +36,26 @@
       "@types/*": [
         ".vitepress/types/*"
       ],
+      "@utils/*": [
+        ".vitepress/utils/*"
+      ],
       "@/*": [
         ".vitepress/*"
       ]
-    }
+    },
+    "resolveJsonModule": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "@types",
+      "types/*"
+    ],
+    "allowJs": true,
+    "strict": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "skipLibCheck": true
   },
   "include": [
     "**/*.ts",

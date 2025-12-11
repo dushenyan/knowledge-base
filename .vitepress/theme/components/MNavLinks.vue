@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { NavLink } from '../../types'
+import type { NavLink } from '../../../types/nav'
 import { slugify } from '@mdit-vue/shared'
 
 import { computed } from 'vue'
@@ -22,21 +22,26 @@ const formatTitle = computed(() => {
   </h2>
   <div class="m-nav-links">
     <MNavLink
-      v-for="{ icon, title, desc, link } in items"
+      v-for="{ icon, title: itemTitle, desc, link, remoteRepo, localPath } in items"
       :key="link"
       :icon="icon"
-      :title="title"
+      :title="itemTitle"
       :desc="desc"
       :link="link"
+      :remote-repo="remoteRepo"
+      :local-path="localPath"
     />
   </div>
 </template>
 
 <style lang="scss" scoped>
+.vp-doc h2 {
+    border-top: none;
+}
 .m-nav-links {
-  --m-nav-gap: 10px;
+  --m-nav-gap: 16px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   grid-row-gap: var(--m-nav-gap);
   grid-column-gap: var(--m-nav-gap);
   grid-auto-flow: row dense;
@@ -44,7 +49,7 @@ const formatTitle = computed(() => {
   margin-top: var(--m-nav-gap);
 }
 
-@each $media, $size in (500px: 140px, 640px: 155px, 768px: 175px, 960px: 200px, 1440px: 240px) {
+@each $media, $size in (500px: 300px, 640px: 320px, 768px: 340px, 960px: 360px, 1440px: 380px) {
   @media (min-width: $media) {
     .m-nav-links {
       grid-template-columns: repeat(auto-fill, minmax($size, 1fr));
@@ -54,7 +59,7 @@ const formatTitle = computed(() => {
 
 @media (min-width: 960px) {
   .m-nav-links {
-    --m-nav-gap: 20px;
+    --m-nav-gap: 24px;
   }
 }
 </style>
