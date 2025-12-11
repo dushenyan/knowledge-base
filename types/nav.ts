@@ -5,4 +5,5 @@ export interface NavLink {
   link: string
   remoteRepo?: string
   localPath?: string
+  homepage?: string
 }

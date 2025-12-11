@@ -2,12 +2,18 @@
   "name": "knowledge-base",
   "type": "module",
   "private": "true",
+  "description": "基于VitePress的知识库系统，包含技术文档和实践记录",
+  "homepage": "https://dushenyan.github.io/10w/pages/home/index.html",
+  "repository": "https://github.com/dushenyan/10w",
+  "icon": "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/vite.svg",
   "scripts": {
     "dev": "vitepress dev",
     "build": "vitepress build",
     "serve": "vitepress serve",
     "lint": "eslint",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint --fix",
+    "generate-nav": "node scripts/generate-nav-data.js",
+    "predev": "npm run generate-nav"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.2",

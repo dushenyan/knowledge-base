@@ -22,7 +22,7 @@ const formatTitle = computed(() => {
   </h2>
   <div class="m-nav-links">
     <MNavLink
-      v-for="{ icon, title: itemTitle, desc, link, remoteRepo, localPath } in items"
+      v-for="{ icon, title: itemTitle, desc, link, remoteRepo, localPath, homepage } in items"
       :key="link"
       :icon="icon"
       :title="itemTitle"
@@ -30,6 +30,7 @@ const formatTitle = computed(() => {
       :link="link"
       :remote-repo="remoteRepo"
       :local-path="localPath"
+      :homepage="homepage"
     />
   </div>
 </template>

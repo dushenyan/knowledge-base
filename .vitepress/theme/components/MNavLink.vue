@@ -12,6 +12,7 @@ const props = defineProps<{
   link: NavLink['link']
   remoteRepo?: NavLink['remoteRepo']
   localPath?: NavLink['localPath']
+  homepage?: NavLink['homepage']
 }>()
 
 const formatTitle = computed(() => {
@@ -21,24 +22,31 @@ const formatTitle = computed(() => {
   return slugify(props.title)
 })
 
-const svg = computed(() => {
-  if (typeof props.icon === 'object')
-    return props.icon.svg
-  return ''
-})
+// 处理点击事件，如果是VSCode链接则阻止默认行为并自定义处理
+function handleClick(e: MouseEvent, homepage: string | undefined) {
+  console.log('laa', homepage)
+  if (homepage) {
+    // VSCode链接需要特殊处理
+    e.preventDefault()
+    // 直接打开VSCode链接
+    window.location.href = homepage
+  }
+}
 </script>
 
 <template>
-  <a v-if="link" class="m-nav-link" :href="link" target="_blank" rel="noreferrer">
+  <a class="m-nav-link" :href="homepage" target="_blank" rel="noreferrer" @click="handleClick($event, homepage)">
     <article class="box">
       <div class="box-header">
-        <div v-if="svg" class="icon" v-html="svg" />
-        <div v-else-if="icon && typeof icon === 'string'" class="icon">
+        <div class="icon">
           <img
+            v-if="icon && typeof icon === 'string' && withBase(icon)"
             :src="withBase(icon)"
             :alt="title"
-            onerror="this.parentElement.style.display='none'"
           >
+          <svg v-else xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+            <path fill="#000" fill-rule="evenodd" d="m256 34.347l192 110.851v221.703L256 477.752L64 366.901V145.198zM106.666 192.001v150.266l128 73.9V265.902zm298.667.001l-128 73.9v150.265l128-73.9zM256 83.614l-125.867 72.67L256 228.952l125.867-72.67z" />
+          </svg>
         </div>
         <div class="title-container">
           <h5 v-if="title" :id="formatTitle" class="title">{{ title }}</h5>
@@ -94,6 +102,7 @@ const svg = computed(() => {
   text-decoration: inherit;
   background-color: var(--vp-c-bg-alt);
   transition: all 0.25s;
+  cursor: pointer;
   &:hover {
     box-shadow: var(--vp-shadow-2);
     border-color: var(--vp-c-brand);
@@ -189,10 +198,17 @@ const svg = computed(() => {
         background-color: #333; // GitHub-like dark color
       }
     }
+
+    &.homepage-icon {
+      &:hover {
+        background-color: #4285F4; // Web browser blue color
+      }
+    }
   }
 
   .desc {
     display: -webkit-box;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -201,32 +217,6 @@ const svg = computed(() => {
     line-height: 1.5;
     font-size: 12px;
     color: var(--vp-c-text-2);
-  }
-
-  .repo-label, .path-label {
-    font-weight: 500;
-    margin-right: 6px;
-    color: var(--vp-c-brand);
-  }
-
-  .repo-link {
-    color: var(--vp-c-brand);
-    text-decoration: none;
-    font-size: 11px;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  .path-text {
-    font-size: 10px;
-    background-color: var(--vp-c-default-soft);
-    padding: 2px 4px;
-    border-radius: 3px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 100%;
   }
 }
 
