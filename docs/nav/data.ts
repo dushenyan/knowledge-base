@@ -17,7 +17,7 @@ export const NAV_DATA: NavData[] = [
     "homepage": "https://dushenyan.github.io/10w/pages/home/index.html"
   },
   {
-    "icon": "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/filezilla.svg",
+    "icon": "",
     "title": "Filing",
     "desc": "个人资料收集整理，包含技术文档、工具链接、学习资源等",
     "link": "vscode://file//Users/shenyandu/Desktop/emphasis/Filing",
@@ -26,7 +26,7 @@ export const NAV_DATA: NavData[] = [
     "homepage": ""
   },
   {
-    "icon": "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/rollup.svg",
+    "icon": "",
     "title": "budai-technology-web",
     "desc": "布袋云科技官方网站项目",
     "link": "vscode://file//Users/shenyandu/Desktop/emphasis/budai-technology-web",
@@ -44,9 +44,9 @@ export const NAV_DATA: NavData[] = [
     "homepage": ""
   },
   {
-    "icon": "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/threejs.svg",
+    "icon": "",
     "title": "desktop-tutorial",
-    "desc": "# Welcome to GitHub Desktop!",
+    "desc": "Welcome to GitHub Desktop!",
     "link": "vscode://file//Users/shenyandu/Desktop/emphasis/desktop-tutorial",
     "remoteRepo": "https://github.com/dushenyan/budai-technology-web",
     "localPath": "/Users/shenyandu/Desktop/emphasis/desktop-tutorial",
@@ -62,7 +62,7 @@ export const NAV_DATA: NavData[] = [
     "homepage": ""
   },
   {
-    "icon": "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/vite.svg",
+    "icon": "",
     "title": "dushenyan-share-record-blog",
     "desc": "个人技术博客，使用Hexo和Butterfly主题构建",
     "link": "vscode://file//Users/shenyandu/Desktop/emphasis/dushenyan-share-record-blog",
@@ -89,7 +89,7 @@ export const NAV_DATA: NavData[] = [
     "homepage": "https://dushenyan.github.io/10w/pages/home/index.html"
   },
   {
-    "icon": "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/vue.svg",
+    "icon": "",
     "title": "minespeeper-web",
     "desc": "基于Vue 3 和 TypeScript 的扫雷游戏，支持多种难度级别和响应式设计",
     "link": "vscode://file//Users/shenyandu/Desktop/emphasis/minespeeper-web",
@@ -107,22 +107,22 @@ export const NAV_DATA: NavData[] = [
     "homepage": ""
   },
   {
-    "icon": "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/vite.svg",
+    "icon": "",
     "title": "mushroomstreet-web",
     "desc": "蘑菇街移动端Web项目，基于Vue 2和Vant UI构建",
     "link": "vscode://file//Users/shenyandu/Desktop/emphasis/mushroomstreet-web",
-    "remoteRepo": "https://github.com/dushenyan/10w",
+    "remoteRepo": "https://github.com/dushenyan/mushroomstreet-web",
     "localPath": "/Users/shenyandu/Desktop/emphasis/mushroomstreet-web",
-    "homepage": "https://dushenyan.github.io/10w/pages/home/index.html"
+    "homepage": ""
   },
   {
     "icon": "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/readthedocs.svg",
     "title": "myresume",
     "desc": "个人线上终端简历，支持PDF生成和动态展示",
     "link": "vscode://file//Users/shenyandu/Desktop/emphasis/myresume",
-    "remoteRepo": "https://dushenyan-resume.netlify.app/",
+    "remoteRepo": "https://github.com/dushenyan/myresume",
     "localPath": "/Users/shenyandu/Desktop/emphasis/myresume",
-    "homepage": "https://github.com/dushenyan/myresume"
+    "homepage": "https://dushenyan-resume.netlify.app/"
   },
   {
     "icon": "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/npm.svg",
@@ -134,7 +134,7 @@ export const NAV_DATA: NavData[] = [
     "homepage": ""
   },
   {
-    "icon": "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/microsoftoffice.svg",
+    "icon": "",
     "title": "office-preview",
     "desc": "Office 文件预览组件，支持PDF、Excel、Word等格式",
     "link": "vscode://file//Users/shenyandu/Desktop/emphasis/office-preview",
@@ -143,7 +143,7 @@ export const NAV_DATA: NavData[] = [
     "homepage": ""
   },
   {
-    "icon": "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/privacy.svg",
+    "icon": "",
     "title": "page-marking",
     "desc": "油猴插件: 智能页面遮罩工具，支持多种遮罩模式，保护隐私",
     "link": "vscode://file//Users/shenyandu/Desktop/emphasis/page-marking",
@@ -152,10 +152,11 @@ export const NAV_DATA: NavData[] = [
     "homepage": ""
   },
   {
+    "icon": "",
     "title": "pingduoduo-Ai-reply",
-    "desc": "拼多多智能客服系统 - 提升客服效率的智能化解决方案",
+    "desc": "拼多多智能客服系统",
     "link": "vscode://file//Users/shenyandu/Desktop/emphasis/pingduoduo-Ai-reply",
-    "remoteRepo": "https://github.com/dushenyan/Customer-Agent.git",
+    "remoteRepo": "https://github.com/dushenyan/Customer-Agent",
     "localPath": "/Users/shenyandu/Desktop/emphasis/pingduoduo-Ai-reply",
     "homepage": ""
   },
@@ -169,7 +170,7 @@ export const NAV_DATA: NavData[] = [
     "homepage": ""
   },
   {
-    "icon": "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/terminal.svg",
+    "icon": "",
     "title": "shenyan-cli",
     "desc": "CLI脚手架工具，支持快速创建项目模板",
     "link": "vscode://file//Users/shenyandu/Desktop/emphasis/shenyan-cli",
@@ -187,7 +188,7 @@ export const NAV_DATA: NavData[] = [
     "homepage": ""
   },
   {
-    "icon": "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/template.svg",
+    "icon": "",
     "title": "templates",
     "desc": "项目模板集合，包含多种技术栈的启动模板",
     "link": "vscode://file//Users/shenyandu/Desktop/emphasis/templates",
@@ -205,7 +206,7 @@ export const NAV_DATA: NavData[] = [
     "homepage": ""
   },
   {
-    "icon": "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/vue.svg",
+    "icon": "",
     "title": "use-command-model",
     "desc": "命令模式Demo，基于Vue 3和Element Plus",
     "link": "vscode://file//Users/shenyandu/Desktop/emphasis/use-command-model",
@@ -214,7 +215,7 @@ export const NAV_DATA: NavData[] = [
     "homepage": ""
   },
   {
-    "icon": "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/vuedotjs.svg",
+    "icon": "",
     "title": "v-fit-columns",
     "desc": "Vue表格列宽自适应组件",
     "link": "vscode://file//Users/shenyandu/Desktop/emphasis/v-fit-columns",
@@ -223,7 +224,7 @@ export const NAV_DATA: NavData[] = [
     "homepage": ""
   },
   {
-    "icon": "res/icon.png",
+    "icon": "",
     "title": "vscode-rule-coverage-viewer",
     "desc": "VSCode 插件: 显示项目中所有规则的覆盖情况",
     "link": "vscode://file//Users/shenyandu/Desktop/emphasis/vscode-rule-coverage-viewer",
@@ -232,7 +233,7 @@ export const NAV_DATA: NavData[] = [
     "homepage": ""
   },
   {
-    "icon": "res/icon.png",
+    "icon": "",
     "title": "vscode-ts-elegant-config",
     "desc": "TypeScript 优雅配置工具，帮助用户轻松管理和优化 tsconfig.json 文件",
     "link": "vscode://file//Users/shenyandu/Desktop/emphasis/vscode-ts-elegant-config",
@@ -250,16 +251,5 @@ export const NAV_DATA: NavData[] = [
     "homepage": ""
   }
 ]
-  },
-  {
-    title: '常用工具',
-    items: [
-      {
-        icon: 'https://caniuse.com/img/favicon-128.png',
-        title: 'Can I use',
-        desc: '前端 API 兼容性查询',
-        link: 'https://caniuse.com',
-      }
-    ],
   },
 ]

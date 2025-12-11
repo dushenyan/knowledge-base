@@ -18,7 +18,6 @@ const formatTitle = computed(() => {
 <template>
   <h2 v-if="title" :id="formatTitle" tabindex="-1">
     {{ title }}
-    <a class="header-anchor" :href="`#${formatTitle}`" aria-hidden="true" />
   </h2>
   <div class="m-nav-links">
     <MNavLink
@@ -38,6 +37,12 @@ const formatTitle = computed(() => {
 <style lang="scss" scoped>
 .vp-doc h2 {
     border-top: none;
+    font-size: 80px;
+    -webkit-text-stroke: 5px rgb(228, 228, 231);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding-bottom: 40px;
 }
 .m-nav-links {
   --m-nav-gap: 16px;

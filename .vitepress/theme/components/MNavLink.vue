@@ -23,22 +23,21 @@ const formatTitle = computed(() => {
 })
 
 // 处理点击事件，如果是VSCode链接则阻止默认行为并自定义处理
-function handleClick(e: MouseEvent, homepage: string | undefined) {
-  console.log('laa', homepage)
-  if (homepage) {
+function handleClick(e: MouseEvent, accessLink: string | undefined) {
+  if (accessLink) {
     // VSCode链接需要特殊处理
     e.preventDefault()
     // 直接打开VSCode链接
-    window.location.href = homepage
+    window.location.href = accessLink
   }
 }
 </script>
 
 <template>
-  <a class="m-nav-link" :href="homepage" target="_blank" rel="noreferrer" @click="handleClick($event, homepage)">
+  <div class="m-nav-link" rel="noreferrer" @click="handleClick($event, homepage)">
     <article class="box">
       <div class="box-header">
-        <div class="icon">
+        <div class="icon" :style="{ backgroundColor: homepage ? '#ffffe5' : 'var(--vp-c-default-soft)' }">
           <img
             v-if="icon && typeof icon === 'string' && withBase(icon)"
             :src="withBase(icon)"
@@ -49,7 +48,9 @@ function handleClick(e: MouseEvent, homepage: string | undefined) {
           </svg>
         </div>
         <div class="title-container">
-          <h5 v-if="title" :id="formatTitle" class="title">{{ title }}</h5>
+          <h5 v-if="title" :id="formatTitle" class="title">
+            {{ title }}
+          </h5>
           <div class="action-icons">
             <a
               v-if="localPath"
@@ -84,9 +85,11 @@ function handleClick(e: MouseEvent, homepage: string | undefined) {
           </div>
         </div>
       </div>
-      <p v-if="desc" class="desc">{{ desc }}</p>
+      <p v-if="desc" class="desc">
+        {{ desc }}
+      </p>
     </article>
-  </a>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -195,20 +198,13 @@ function handleClick(e: MouseEvent, homepage: string | undefined) {
 
     &.remote-icon {
       &:hover {
-        background-color: #333; // GitHub-like dark color
-      }
-    }
-
-    &.homepage-icon {
-      &:hover {
-        background-color: #4285F4; // Web browser blue color
+        background-color: #4285F4; // GitHub-like dark color
       }
     }
   }
 
   .desc {
     display: -webkit-box;
-    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;

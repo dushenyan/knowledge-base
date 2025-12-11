@@ -9,7 +9,7 @@
     ],
     "useDefineForClassFields": true,
     "baseUrl": "./",
-    "module": "preserve",
+    "module": "es2022",
     "moduleResolution": "bundler",
     "paths": {
       "@config/*": [
