@@ -1,3 +1,4 @@
+import { filterDocs } from './const'
 import docsTree from './docsTree.json'
 
 interface NavItem {
@@ -10,7 +11,7 @@ function getJiShuJiHe(): NavItem[] {
   const arr: NavItem[] = []
   docsTree.forEach((item) => {
     // 过滤项
-    if (['nav'].includes(item.title))
+    if (filterDocs.includes(item.title))
       return
     arr.push({
       text: item.title,
@@ -39,7 +40,6 @@ export const nav = [
   },
   {
     text: '技术集合',
-    // link: '/docs/index',
     items: getJiShuJiHe(),
   },
 ]

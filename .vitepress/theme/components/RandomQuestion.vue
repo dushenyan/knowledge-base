@@ -99,7 +99,9 @@ onMounted(() => {
     </div>
     <div v-else-if="selectedQuestion" class="question-card">
       <div class="question-header">
-        <h3 class="question-title">{{ selectedQuestion.title }}</h3>
+        <h3 class="question-title">
+          {{ selectedQuestion.title }}
+        </h3>
         <div class="question-meta">
           <span class="category-tag">{{ selectedQuestion.category }}</span>
           <button class="refresh-btn" @click="refreshQuestion">
@@ -314,4 +316,3 @@ onMounted(() => {
   }
 }
 </style>
-

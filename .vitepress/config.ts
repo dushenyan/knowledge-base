@@ -11,7 +11,6 @@ import { withMermaid } from 'vitepress-plugin-mermaid'
 import { renderSandbox } from 'vitepress-plugin-sandpack'
 import { withSidebar } from 'vitepress-sidebar'
 import { nav } from './config/nav'
-import { sidebar } from './config/sidebar'
 import docsTreePlugin from './theme/plugin/docsTreePlugin'
 import markdownBracketEscaper from './theme/plugin/markdownBracketEscaper'
 import { PluginTable } from './theme/plugin/pluginTable'
@@ -74,7 +73,6 @@ const vitePressOptions: UserConfig = withMermaid({
     outline: [2, 4],
     outlineTitle: '目录',
     nav,
-    sidebar,
   },
   /**
    * 自定义 markdown 解析器

@@ -4,7 +4,6 @@ import { getTitleSet, useDocsTreeData } from '@theme/hooks/useDocsTreeData'
 import { EmitType, useEmits } from '@theme/hooks/useEmits'
 import { useRoute, useRouter } from 'vitepress'
 import { ref, watch } from 'vue'
-import { supabase } from '@/request'
 import { useAppStore } from '@/stores'
 
 defineOptions({

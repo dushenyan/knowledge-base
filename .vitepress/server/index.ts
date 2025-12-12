@@ -4,5 +4,5 @@ import { writeTreeToFile } from './printTree'
 // 生成docs 目录树
 writeTreeToFile('./docs', './.vitepress/config/docsTree.json')
 
-// 执行生成
+// 执行生成 个人项目
 generateNavData()
