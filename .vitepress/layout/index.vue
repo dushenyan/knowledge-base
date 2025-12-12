@@ -2,7 +2,7 @@
 import type { Zoom } from 'medium-zoom'
 import type { SandpackPredefinedTemplate } from '../types'
 import { sandpackTemplateOptions } from '@config/emnus'
-import { Edit, List } from '@element-plus/icons-vue'
+import { ArrowUpBold, Edit, List } from '@element-plus/icons-vue'
 import HomeUnderline from '@theme/components/HomeUnderline'
 import { EmitType, useEmits } from '@theme/hooks/useEmits'
 import confetti from 'canvas-confetti'
@@ -151,7 +151,13 @@ const sandpackTemplateValue = ref<SandpackPredefinedTemplate>('vite')
       </template>
       <template #layout-top>
         <!-- <LockScreen /> -->
-        <el-backtop />
+        <el-backtop>
+          <div style="color: var(--vp-c-brand);">
+            <el-icon size="24">
+              <ArrowUpBold />
+            </el-icon>
+          </div>
+        </el-backtop>
       </template>
     </Layout>
   </Suspense>
@@ -182,6 +188,7 @@ const sandpackTemplateValue = ref<SandpackPredefinedTemplate>('vite')
   color: var(--vp-c-brand);
   cursor: pointer;
   z-index: 9999;
+  border-radius: 50%;
 }
 
 .sandbox-title {
