@@ -1,11 +1,10 @@
 import type { PluginOption } from 'vite'
-import { exec } from 'node:child_process'
+import { rejects } from 'node:assert'
+import { exec, spawn } from 'node:child_process'
 import fs from 'node:fs'
-import path from 'node:path'
+import path, { resolve } from 'node:path'
 import process from 'node:process'
 import { promisify } from 'node:util'
-
-const execPromise = promisify(exec)
 
 interface OptionVo {
   // 需要执行 文件地址
@@ -29,13 +28,34 @@ const defaultOptions: OptionVo = {
   watchRegex: /^---\r?\n([\s\S]*?)\r?\n---/,
 }
 
-async function runTSFileForOptions(options: OptionVo): Promise<void> {
+function runTSFileForOptions(options: OptionVo): Promise<void> {
+  const indexTsPath = path.join(process.cwd(), options.path)
+
+  return new Promise((resolve, reject) => {
+    const child = spawn('npx', ['tsx', indexTsPath], {
+      stdio: 'inherit',
+      shell: process.platform === 'win32',
+    })
+
+    child.on('close', (code) => {
+      if (code === 0)
+        console.log('/server/index.ts 已成功运行')
+      else
+        console.error(`运行 index.ts 时出错, 退出码: ${code}`)
+
+      resolve()
+    })
+
+    child.on('error', (err) => {
+      console.error('文件运行失败', err)
+      reject(err)
+    })
+  })
   try {
     // 定位 index.ts 文件 绝对路径
-    const indexTsPath = path.join(process.cwd(), options.path)
     // 使用 tsx 直接运行 TypeScript 文件
-    await execPromise(`npx tsx ${indexTsPath}`)
-    console.log('/server/index.ts 已成功运行')
+    // await execPromise(`npx tsx ${indexTsPath}`)
+    // console.log(`${indexTsPath} 已成功运行`)
   }
   catch (error) {
     // 若运行过程中出现错误，打印错误信息

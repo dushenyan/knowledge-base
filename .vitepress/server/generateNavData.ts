@@ -190,8 +190,8 @@ export function generateNavData(): void {
       .map(dirent => dirent.name)
       .sort() // 按字母顺序排序
   }
-  catch (error) {
-    console.error('无法读取emphasis目录:', error)
+  catch {
+    console.error('没有找到emphasis目录:')
     return
   }
 
@@ -220,7 +220,7 @@ export function generateNavData(): void {
 
 export const NAV_DATA: NavData[] = [
   {
-    title: '项目集合',
+    title: 'EMPHASIS',
     items: ${JSON.stringify(projectItems, null, 2)}
   },
 ]`
