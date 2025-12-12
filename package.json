@@ -1,17 +1,17 @@
 {
   "name": "knowledge-base",
   "type": "module",
-  "private": "true",
   "description": "基于VitePress的知识库系统，包含技术文档和实践记录",
-  "homepage": "https://dushenyan.github.io/10w/pages/home/index.html",
-  "repository": "https://github.com/dushenyan/10w",
-  "iconUrl": "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/vite.svg",
+  "author": "dushenyan <dushenyan88@gmail.com>",
+  "homepage": "https://mainsibaodian.netlify.app/",
+  "repository": "https://github.com/dushenyan/knowledge-base",
   "scripts": {
     "dev": "vitepress dev",
     "build": "vitepress build",
     "serve": "vitepress serve",
-    "lint": "eslint",
-    "lint:fix": "eslint --fix"
+    "lint": "eslint . ",
+    "lint:fix": "eslint . --fix",
+    "lint:ui": "npx @eslint/config-inspector"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.2",
