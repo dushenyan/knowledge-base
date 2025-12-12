@@ -11,6 +11,9 @@ hero:
     - theme: brand
       text: 快速入手
       link: /docs/other/hello
+    - theme: alt
+      text: 随机试题
+      link: /docs/_pages/question/index
 features:
   - icon: 🎯
     title: 聚焦前端面试

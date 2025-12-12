@@ -1143,12 +1143,7 @@
       {
         "title": "hello",
         "metadata": {
-          "sidebar": true,
-          "outline": [
-            2,
-            3,
-            4
-          ]
+          "sidebar": false
         },
         "link": "%2Fdocs%2Fother%2Fhello",
         "fileExtension": ".md"

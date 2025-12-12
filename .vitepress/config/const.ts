@@ -1,2 +1,2 @@
 // 排除的目录名称
-export const filterDocs: string[] = ['nav']
+export const filterDocs: string[] = ['_pages']
