@@ -30,13 +30,13 @@ function getJiShuJiHe(): NavItem[] {
 export const nav = [
   {
     text: '随机试题',
-    activeMatch: '/docs/random-questions',
-    link: '/docs/random-questions',
+    activeMatch: '/docs/_pages/question',
+    link: '/docs/_pages/question/index',
   },
   {
-    text: '资源导航',
-    activeMatch: '/docs/nav',
-    link: '/docs/nav/index',
+    text: '项目导航',
+    activeMatch: '/docs/_pages/projects',
+    link: '/docs/_pages/projects/index',
   },
   {
     text: '技术集合',

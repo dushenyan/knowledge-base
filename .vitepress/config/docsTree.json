@@ -1066,36 +1066,31 @@
     "link": "%2Fdocs%2FVue"
   },
   {
-    "title": "_page",
+    "title": "_pages",
     "items": [
       {
-        "title": "nav",
-        "items": [],
-        "link": "%2Fdocs%2F_page%2Fnav"
+        "title": "projects",
+        "items": [
+          {
+            "title": "data",
+            "link": "%2Fdocs%2F_pages%2Fprojects%2Fdata",
+            "fileExtension": ".ts"
+          },
+          {
+            "title": "index",
+            "link": "%2Fdocs%2F_pages%2Fprojects%2Findex",
+            "fileExtension": ".scss"
+          }
+        ],
+        "link": "%2Fdocs%2F_pages%2Fprojects"
       },
       {
-        "title": "random-question",
+        "title": "question",
         "items": [],
-        "link": "%2Fdocs%2F_page%2Frandom-question"
+        "link": "%2Fdocs%2F_pages%2Fquestion"
       }
     ],
-    "link": "%2Fdocs%2F_page"
-  },
-  {
-    "title": "nav",
-    "items": [
-      {
-        "title": "data",
-        "link": "%2Fdocs%2Fnav%2Fdata",
-        "fileExtension": ".ts"
-      },
-      {
-        "title": "index",
-        "link": "%2Fdocs%2Fnav%2Findex",
-        "fileExtension": ".scss"
-      }
-    ],
-    "link": "%2Fdocs%2Fnav"
+    "link": "%2Fdocs%2F_pages"
   },
   {
     "title": "other",
@@ -1216,24 +1211,6 @@
       }
     ],
     "link": "%2Fdocs%2Fother"
-  },
-  {
-    "title": "random-questions",
-    "metadata": {
-      "layout": "home",
-      "layoutClass": "home-layout",
-      "sidebar": false,
-      "editLink": false,
-      "footer": false,
-      "notArticle": true,
-      "outline": [
-        2,
-        3,
-        4
-      ]
-    },
-    "link": "%2Fdocs%2Frandom-questions",
-    "fileExtension": ".md"
   },
   {
     "title": "编码规范",

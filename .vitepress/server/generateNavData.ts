@@ -17,7 +17,7 @@ function getDesktopPath(): string {
 // emphasis文件夹路径
 const emphasisDir = getDesktopPath()
 // 导出文件路径
-const outputPath = path.join(projectRoot, '../docs/nav/data.ts')
+const outputPath = path.join(projectRoot, '../docs/_pages/projects/data.ts')
 
 console.log(`正在扫描emphasis目录: ${emphasisDir}`)
 
