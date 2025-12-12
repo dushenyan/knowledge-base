@@ -519,11 +519,6 @@
     "link": "%2Fdocs%2FPromise"
   },
   {
-    "title": "REACT",
-    "items": [],
-    "link": "%2Fdocs%2FREACT"
-  },
-  {
     "title": "TypeScript",
     "items": [
       {

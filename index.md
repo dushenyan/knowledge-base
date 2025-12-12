@@ -24,17 +24,6 @@ features:
   - icon: 💻
     title: 交互式学习体验
     details: 提供全文搜索快速定位知识点，并内置在线代码编辑器，方便随时动手实践和验证。
-  - icon: ⚡
-    title: 简单
-    details: 开箱即用，只需要简单配置，就可以马上使用。
-  - icon: 🛠️
-    title: 全面
-    details: 集成组件库、TailwindCSS、SVG图标等默认解决方案，应有尽有！
-  - icon: ✊
-    title: 强大
-    link: https://github.com/shoppingzh/press-util
-    linkText: 更多
-    details: 自动生成导航栏与侧边栏，你的烦恼即是我的烦恼。
 ---
 
 <style>
@@ -49,6 +38,7 @@ features:
   transform: translate(-50%, -50%);
   transition: transform 59s 1s cubic-bezier(0.3, 0, 0.8, 1);
 }
+
 /*爱的魔力转圈圈*/
 .home-layout .image-src:hover {
   transform: translate(-50%, -50%) rotate(666turn);

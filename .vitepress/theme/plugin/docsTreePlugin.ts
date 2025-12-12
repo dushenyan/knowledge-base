@@ -63,11 +63,21 @@ function docsTreePlugin(options: Partial<OptionVo>): PluginOption {
       }
     },
     configureServer(server) {
+      // 缓存地址文件
       const cacheFile = path.join(process.cwd(), '.vitepress', mergedOptions.cacheFilePath)
+
+      // 如果缓存文件地址不存在
+      if (!fs.existsSync(cacheFile)) {
+        // 新建文件
+        fs.mkdirSync(path.dirname(cacheFile), { recursive: true })
+        // 写入内容
+        fs.writeFileSync(cacheFile, '{}', 'utf-8')
+      }
 
       // 从磁盘读缓存 读取缓存文件[文件修改索引]
       let fmCache: Record<string, string> = {}
       try {
+        // 读取文件 解析换成文件需要满足 JSON 格式 : "{}" 不能空白文件
         fmCache = JSON.parse(fs.readFileSync(cacheFile, 'utf-8'))
       }
       catch {
