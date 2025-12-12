@@ -68,10 +68,5 @@
   "/Users/dushenyan/Desktop/mainshibaodian/docs/Vue/自定义元素.md": "tags: [ 'defineCustomElement()']\n",
   "/Users/dushenyan/Desktop/mainshibaodian/docs/Vue/自定义渲染器.md": "tags: [ '自定义渲染器 createRenderer()','__VUE_OPTIONS_API__','__VUE_PROD_DEVTOOLS__','__VUE_PROD_HYDRATION_MISMATCH_DETAILS__']",
   "/Users/dushenyan/Desktop/mainshibaodian/docs/index.md": "layout: page",
-  "/Users/dushenyan/Desktop/mainshibaodian/docs/Vue/内置内容-指令.md": "tags: ['v-text','v-html','v-show','v-if','v-else','v-for','v-on','v-bind','v-model','v-slot','v-pre','v-once','v-memo','v-clock']",
-  "/Users/shenyandu/Desktop/emphasis/knowledge-base/docs/other/hello.md": "sidebar: true\noutline: [2, 3, 4]",
-  "/Users/shenyandu/Desktop/emphasis/knowledge-base/docs/_page/random-questions.md": "layout: home\nlayoutClass: home-layout\nsidebar: false\neditLink: false\nfooter: false\nnotArticle: true\noutline: [2, 3, 4]",
-  "/Users/shenyandu/Desktop/emphasis/knowledge-base/docs/_page/random-question/random-questions.md": "layout: home\nlayoutClass: home-layout\nsidebar: false\neditLink: false\nfooter: false\nnotArticle: true\noutline: [2, 3, 4]",
-  "/Users/shenyandu/Desktop/emphasis/knowledge-base/docs/random-questions.md": "layout: home\nlayoutClass: home-layout\nsidebar: false\neditLink: false\nfooter: false\nnotArticle: true\noutline: [2, 3, 4]",
-  "/Users/shenyandu/Desktop/emphasis/knowledge-base/docs/nav/index.md": "layoutClass: nav-layout\nsidebar: false\neditLink: false\nfooter: false"
+  "/Users/dushenyan/Desktop/mainshibaodian/docs/Vue/内置内容-指令.md": "tags: ['v-text','v-html','v-show','v-if','v-else','v-for','v-on','v-bind','v-model','v-slot','v-pre','v-once','v-memo','v-clock']"
 }

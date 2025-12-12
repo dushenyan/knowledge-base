@@ -18,6 +18,15 @@ export const NAV_DATA: NavData[] = [
   },
   {
     "icon": "",
+    "title": "Filing",
+    "desc": "个人资料收集整理，包含技术文档、工具链接、学习资源等",
+    "link": "vscode://file//Users/shenyandu/Desktop/emphasis/Filing",
+    "remoteRepo": "https://github.com/dushenyan/Filing.git",
+    "localPath": "/Users/shenyandu/Desktop/emphasis/Filing",
+    "homepage": ""
+  },
+  {
+    "icon": "",
     "title": "budai-technology-web",
     "desc": "布袋云科技官方网站项目",
     "link": "vscode://file//Users/shenyandu/Desktop/emphasis/budai-technology-web",

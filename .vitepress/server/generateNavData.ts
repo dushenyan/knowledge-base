@@ -2,7 +2,6 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { getDesktopPath } from '@utils/paths'
 
 // 获取当前目录路径
 const __filename = fileURLToPath(import.meta.url)
@@ -10,8 +9,13 @@ const __dirname = path.dirname(__filename)
 const projectRoot = path.resolve(__dirname, '..')
 
 // 获取桌面路径，兼容不同操作系统
+function getDesktopPath(): string {
+  const homeDir = os.homedir()
+  return path.join(homeDir, 'Desktop', 'emphasis')
+}
+
 // emphasis文件夹路径
-const emphasisDir = getDesktopPath('emphasis')
+const emphasisDir = getDesktopPath()
 // 导出文件路径
 const outputPath = path.join(projectRoot, '../docs/nav/data.ts')
 

@@ -1066,22 +1066,6 @@
     "link": "%2Fdocs%2FVue"
   },
   {
-    "title": "_page",
-    "items": [
-      {
-        "title": "nav",
-        "items": [],
-        "link": "%2Fdocs%2F_page%2Fnav"
-      },
-      {
-        "title": "random-question",
-        "items": [],
-        "link": "%2Fdocs%2F_page%2Frandom-question"
-      }
-    ],
-    "link": "%2Fdocs%2F_page"
-  },
-  {
     "title": "nav",
     "items": [
       {
