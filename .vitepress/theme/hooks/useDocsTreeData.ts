@@ -34,7 +34,6 @@ export function useDocsTreeData(dirName: string): DocsTreeData {
 
 /**
  * 获取title为集合
- * @param tree - 文档树数据。
  * @returns 包含所有文档路径的数组。
  */
 export function getTitleSet(): Set<string> {

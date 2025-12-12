@@ -12,8 +12,7 @@ interface OptionsVO {
 
 const emitter = mitt()
 
-// eslint-disable-next-line ts/explicit-function-return-type
-export function useEmits(options?: OptionsVO) {
+export function useEmits(options?: OptionsVO): typeof emitter {
   if (options) {
     emitter.on(options.name, options.onCallback)
 

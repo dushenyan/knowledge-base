@@ -1,4 +1,3 @@
-import type MarkdownIt from 'markdown-it'
 import type { Options } from 'markdown-it'
 import type Renderer from 'markdown-it/lib/renderer.mjs'
 import type Token from 'markdown-it/lib/token.mjs'
@@ -84,15 +83,12 @@ const vitePressOptions: UserConfig = withMermaid({
     image: {
       lazyLoading: true,
     },
-    vue: {
-      scriptSetup: true,
-    },
     /**
      * 配置 Markdown-it 实例
      *
      * @param {object} md markdown 实例
      */
-    config: (md: MarkdownIt): void => {
+    config: (md: any): void => {
       md.use(PluginTable).use(container, 'sandbox', {
         render(tokens: Token[], idx: number) {
           return renderSandbox(tokens, idx, 'sandbox')

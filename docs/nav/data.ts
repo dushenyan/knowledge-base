@@ -71,13 +71,13 @@ export const NAV_DATA: NavData[] = [
     "homepage": ""
   },
   {
-    "icon": "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/vite.svg",
+    "icon": "",
     "title": "knowledge-base",
     "desc": "基于VitePress的知识库系统，包含技术文档和实践记录",
     "link": "vscode://file//Users/shenyandu/Desktop/emphasis/knowledge-base",
-    "remoteRepo": "https://github.com/dushenyan/10w",
+    "remoteRepo": "https://github.com/dushenyan/knowledge-base",
     "localPath": "/Users/shenyandu/Desktop/emphasis/knowledge-base",
-    "homepage": "https://dushenyan.github.io/10w/pages/home/index.html"
+    "homepage": "https://mainsibaodian.netlify.app/"
   },
   {
     "icon": "",

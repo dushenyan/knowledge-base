@@ -1,6 +1,6 @@
 const HomeUnderline = {
   props: ['fm'],
-  setup(props) {
+  setup(props: { fm: any }) {
     const { fm } = props
     return () => (
       <span id="hero-text">

@@ -46,7 +46,7 @@ async function runTSFileForOptions(options: OptionVo): Promise<void> {
 /**
  * 文档树插件 用于生成文档树
  * @param options 插件配置
- * @returns
+ * @returns 树结构 插件配置
  */
 function docsTreePlugin(options: Partial<OptionVo>): PluginOption {
   // 合并配置
