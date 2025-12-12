@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { NavLink } from '../../../types/nav'
+import type { NavLink } from '../../types'
 import { slugify } from '@mdit-vue/shared'
 
 import { computed } from 'vue'

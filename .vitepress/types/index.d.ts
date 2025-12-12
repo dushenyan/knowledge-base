@@ -1,14 +1,13 @@
 import { sandpackTemplateOptions } from '@config/emnus'
 
 export interface NavLink {
-  /** 站点图标 */
   icon?: string | { svg: string }
-  /** 站点名称 */
-  title: string
-  /** 站点名称 */
+  title?: string
   desc?: string
-  /** 站点链接 */
   link: string
+  remoteRepo?: string
+  localPath?: string
+  homepage?: string
 }
 
 export interface PageEnvDataVO {
