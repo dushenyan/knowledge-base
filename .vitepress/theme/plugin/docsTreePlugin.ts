@@ -23,7 +23,7 @@ interface OptionVo {
 // 默认配置
 const defaultOptions: OptionVo = {
   path: '/server/index.ts',
-  cacheFilePath: '/config/.fm-cache.json',
+  cacheFilePath: '/config/.fmCache.json',
   watchDirectory: '/docs',
   watchAll: false,
   watchRegex: /^---\r?\n([\s\S]*?)\r?\n---/,
