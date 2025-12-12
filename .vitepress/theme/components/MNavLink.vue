@@ -37,7 +37,7 @@ function handleClick(e: MouseEvent, accessLink: string | undefined) {
   <div class="m-nav-link" rel="noreferrer" @click="handleClick($event, homepage)">
     <article class="box">
       <div class="box-header">
-        <div class="icon" :style="{ backgroundColor: homepage ? '#ffffe5' : 'var(--vp-c-default-soft)' }">
+        <div class="icon" :style="{ backgroundColor: homepage ? 'var(--vp-c-brand)' : 'var(--vp-c-default-soft)' }">
           <img
             v-if="icon && typeof icon === 'string' && withBase(icon)"
             :src="withBase(icon)"
