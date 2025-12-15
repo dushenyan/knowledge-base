@@ -1,113 +1,100 @@
-## 简介
+# 项目编码规范教程
 
-**组件库`components`（[使用文档](https://shuzihainan.yuque.com/seqbww/cub2b0/muvviz)）与工具库`utils`（[使用文档](https://shuzihainan.yuque.com/seqbww/cub2b0/pmtseg)）已发布为`npm`包**
+## 一、风格指南
 
-## 风格指南
+### 1. 组件命名规范
 
-### Components
+- 所有组件文件名采用 PascalCase（首字母大写），如 `BackToTop.vue`，但 `index.vue` 除外。
+- 示例：
+  - `@/components/BackToTop/index.vue`
+  - `@/views/example/components/Button.vue`
+- 参考：[Vue 风格指南](https://cn.vuejs.org/v2/style-guide/)
 
-所有的`Component`文件都是以大写开头 (PascalCase)，除了 `index.vue`。参考[vue 风格指南](https://cn.vuejs.org/v2/style-guide/)。
+### 2. 视图文件命名规范
 
-例：
+- 路由相关的 `.vue` 文件和文件夹均采用 kebab-case（短横线连接）。
+- 示例：
+  - `@/views/error-page/index.vue`
+  - `@/views/home/page-one.vue`
 
-- `@/components/BackToTop/index.vue`
-- `@/views/example/components/Button.vue`
+### 3. JS 文件命名规范
 
-### Views
+- 普通 `.js` 文件采用 kebab-case。
+- `@/store/modules` 下的 `.js` 文件可使用小驼峰命名法。
+- 示例：
+  - `@/utils/open-window.js`
+  - `@/store/modules/tagsView.js`
 
-在`views`文件下，代表路由的`.vue`文件都使用横线连接 (kebab-case)，代表路由的文件夹也是使用同样的规则。
 
-例：
+## 二、代码提交规范
 
-- `@/views/error-page/index.vue`
-- `@/views/home/page-one.vue`
+推荐遵循 [Conventional Commits](https://www.conventionalcommits.org/) 规范。
 
-### JS 文件
+### 1. Commit Message 结构
 
-`.js`文件都遵循横线连接 (kebab-case)，`@/store/modules`中`.js`文件可使用小驼峰命名法。
+每次提交包括三部分：Header、Body 和 Footer。
 
-例：
-
-- `@/utils/open-window.js`
-- `@/store/modules/tagsView.js`
-
-## 注意事项
-
-- **若不使用 tagViews 组件，建议将 AppMain 中的 keepAlive 移除。**
-- **不适用缓存的路由页面，需在路由 meta 中添加 noCache。**
-- **`@/src/settings.js`文件中包含部分配置开关**
-- **element-ui 组件的引入在`el-loader.js`中**
-- **项目使用`dayjs`代替`moment`**
-- **图标可使用`svg`格式，同时可使用`svgo`命令来压缩精简`@/icons/svg`文件**
-- **当路由过多时，可在`@/router`中新建`modules`文件夹，将路由定义在`modules`中后再引入到`index.js`**
-
-## 关于代码提交规范
-
-参考[https://www.conventionalcommits.org](https://www.conventionalcommits.org/)
-
-### 可自行输入规范化 commit 或执行 `yarn commit` 调用规范提交工具
-
-Commit message 都包括三个部分：Header，Body 和 Footer
+格式如下：
 
 ```
 <type>(<scope>): <subject>
-// 空一行
+
 <body>
-// 空一行
+
 <footer>
 ```
 
-简易提交示例：
-`feat: initial commit`
+- 简单示例：`feat: initial commit`
+- Header 必填，Body 和 Footer 可省略。
 
-Header 是必需的，Body 和 Footer 可以省略。
+### 2. Header 字段说明
 
-### Header 包括三个字段：`type`（必需）、`scope`（可选）和`subject`（必需）。
+- **type**（必需）：说明提交类型
+- **scope**（可选）：影响范围
+- **subject**（必需）：简短描述（不超过 50 字符）
 
-1. type
+#### type 类型说明
 
-   `type`用于说明 commit 的类别
 
-   ```
-   feat：新功能（feature）
-   fix：修补bug
-   docs：文档（documentation）
-   style：代码格式（不影响代码运行的变动）
-   refactor：重构（即不是新增功能，也不是修改bug的代码变动）
-   test：增加测试
-   perf：优化性能
-   revert：代码回滚
-   chore：构建过程或辅助工具的变动，非src和test文件变动
-   ci：更改持续集成软件的配置文件和package中的scripts命令，例如scopes: Travis, Circle等
-   build：变更项目构建或外部依赖（例如scopes: webpack、gulp、npm等）
-   ```
+- feat：新功能
+- fix：修复 bug
+- docs：文档
+- style：代码格式（不影响运行）
+- refactor：重构
+- test：测试
+- perf：性能优化
+- revert：回滚
+- chore：构建或工具变动
+- ci：持续集成相关
+- build：构建或依赖变动
 
-2. scope
+#### subject 书写规范
 
-   `scope`用于说明 commit 影响的范围
+- 以动词开头，使用第一人称现在时（如 change，而非 changed 或 changes）
+- 首字母小写
+- 结尾不加句号
 
-3. subject
+### 3. Body 部分
 
-   `subject`是 commit 目的的简短描述，不超过 50 个字符
+详细描述本次提交内容，可分多行。
 
-   ```
-   以动词开头，使用第一人称现在时，比如change，而不是changed或changes
-   第一个字母小写
-   结尾不加句号（.）
-   ```
+### 4. Footer 部分
 
-### Body 部分是对本次 commit 的详细描述，可以分成多行
+仅用于以下两种情况：
 
-### Footer 部分只用于两种情况
+- **不兼容变动**：以 `BREAKING CHANGE` 开头，描述变动内容、理由及迁移方法。
+- **关闭 Issue**：针对某个 issue，可在 Footer 关闭该 issue。
 
-1. 不兼容变动
+## 三、参考链接
 
-   如果当前代码与上一个版本不兼容，则 Footer 部分以`BREAKING CHANGE`开头，后面是对变动的描述、以及变动理由和迁移方法。
+**注意事项**
 
-2. 关闭 Issue
+- 不使用 `tagViews` 组件时，建议移除 `AppMain` 中的 `keepAlive`。
+- 不适用缓存的路由页面需在路由 `meta` 中添加 `noCache`。
+- 配置项可在 `@/src/settings.js` 文件中调整。
+- `element-ui` 组件统一在 `el-loader.js` 中引入。
+- 日期处理推荐使用 `dayjs` 替代 `moment`。
+- 图标建议使用 `svg` 格式，并可用 `svgo` 命令压缩优化 `@/icons/svg` 文件。
+- 路由较多时，可在 `@/router` 下新建 `modules` 文件夹，将路由定义拆分后再引入 `index.js`。
 
-   如果当前 commit 针对某个 issue，那么可以在 Footer 部分关闭这个 issue 。
-
-### 参考链接
-
-[vue-element-admin](https://panjiachen.github.io/vue-element-admin-site/zh/guide/)
+- [vue-element-admin](https://panjiachen.github.io/vue-element-admin-site/zh/guide/)
