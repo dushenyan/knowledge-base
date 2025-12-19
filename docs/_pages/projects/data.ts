@@ -5,7 +5,7 @@ type NavData = {
 
 export const NAV_DATA: NavData[] = [
   {
-    title: '项目集合',
+    title: 'EMPHASIS',
     items: [
   {
     "icon": "https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/vite.svg",
