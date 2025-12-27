@@ -75,15 +75,19 @@ const showEditDrawer = ref(false)
 
 const showListDrawer = ref(false)
 
+const appStore = useAppStore()
+
 function handleClick(e: MouseEvent, type: string) {
   e.preventDefault()
   if (type === 'list') {
     showListDrawer.value = !showListDrawer.value
+    appStore.setListDrawerVisible(showListDrawer.value)
     useEmits({
       name: EmitType.ListDrawerClose,
       onCallback: (val: any) => {
         console.log(val)
         showListDrawer.value = false
+        appStore.setListDrawerVisible(false)
       },
     })
   }
@@ -97,7 +101,23 @@ function handleClick(e: MouseEvent, type: string) {
   }
 }
 
-const appStore = useAppStore()
+// 监听全局事件来控制侧边栏
+if (inBrowser) {
+  window.addEventListener('toggle-list-drawer', (event: any) => {
+    const { show, category } = event.detail || {}
+    showListDrawer.value = show || false
+    appStore.setListDrawerVisible(show || false)
+    
+    if (category) {
+      appStore.setSelectedCategory(category)
+    }
+  })
+}
+
+// 监听store中的侧边栏状态变化
+watch(() => appStore.getListDrawerVisible, (visible) => {
+  showListDrawer.value = visible
+})
 
 const activeName = computed(() => appStore.getActiveName)
 

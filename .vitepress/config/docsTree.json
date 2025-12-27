@@ -1083,7 +1083,13 @@
     "items": [
       {
         "title": "jishu",
-        "items": [],
+        "items": [
+          {
+            "title": "index",
+            "link": "%2Fdocs%2F_pages%2Fjishu%2Findex",
+            "fileExtension": ".scss"
+          }
+        ],
         "link": "%2Fdocs%2F_pages%2Fjishu"
       },
       {
@@ -1093,11 +1099,6 @@
             "title": "data",
             "link": "%2Fdocs%2F_pages%2Fprojects%2Fdata",
             "fileExtension": ".ts"
-          },
-          {
-            "title": "index",
-            "link": "%2Fdocs%2F_pages%2Fprojects%2Findex",
-            "fileExtension": ".scss"
           }
         ],
         "link": "%2Fdocs%2F_pages%2Fprojects"

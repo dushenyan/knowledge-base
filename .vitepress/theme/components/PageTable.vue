@@ -47,10 +47,15 @@ function navigateToPage(path?: string) {
 }
 
 watch(() => props.activeName, (val) => {
-  if (!props.activeName) {
-    return
+  if (val) {
+    _activeName.value = val
+  } else {
+    // 如果没有传入activeName，则使用store中的值
+    const storeActiveName = appStore.getActiveName
+    if (storeActiveName) {
+      _activeName.value = storeActiveName
+    }
   }
-  _activeName.value = val
 }, {
   immediate: true,
 })

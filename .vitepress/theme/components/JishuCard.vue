@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useAppStore } from '@/stores'
 
 interface DocsTreeItem {
   title: string
@@ -15,6 +16,8 @@ const props = defineProps<{
   modules: DocsTreeItem[]
 }>()
 
+const appStore = useAppStore()
+
 const formatTitle = computed(() => {
   return props.title ? props.title.replace(/\s+/g, '-').toLowerCase() : ''
 })
@@ -23,6 +26,20 @@ const getItemCount = (item: DocsTreeItem): number => {
   const count = item.items?.length || item.children?.length || 0
   return count
 }
+
+// 处理卡片点击事件，打开侧边栏并设置选中的分类
+const handleClick = (module: DocsTreeItem, event: MouseEvent) => {
+  event.preventDefault()
+  
+  // 打开侧边栏并设置当前分类
+  appStore.openListDrawer(module.title)
+  
+  // 触发全局事件，让layout组件知道需要显示侧边栏
+  const customEvent = new CustomEvent('toggle-list-drawer', {
+    detail: { show: true, category: module.title }
+  })
+  window.dispatchEvent(customEvent)
+}
 </script>
 
 <template>
@@ -30,10 +47,10 @@ const getItemCount = (item: DocsTreeItem): number => {
     {{ title }}
   </h2>
   <div class="jishu-card-grid">
-    <a
+    <div
       v-for="module in props.modules"
       :key="module.title"
-      :href="module.link || module.path || '#'"
+      @click="handleClick(module, $event)"
       class="jishu-card"
       :class="{ 'has-items': getItemCount(module) > 0 }"
     >
@@ -49,7 +66,7 @@ const getItemCount = (item: DocsTreeItem): number => {
       <p v-if="getItemCount(module) > 0" class="jishu-card-subtitle">
         包含 {{ getItemCount(module) }} 篇文章
       </p>
-    </a>
+    </div>
   </div>
 </template>
 
