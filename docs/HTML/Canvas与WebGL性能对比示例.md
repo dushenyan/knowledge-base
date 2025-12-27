@@ -92,7 +92,7 @@ graph TD
 </html>
 ```
 
-[![alt text](image-2.png)](https://github.com/dushenyan/picx-images-hosting/raw/master/mainsibaodian/image-2.6ikr1hi2bo.webp)
+![image-2.png](https://github.com/dushenyan/picx-images-hosting/raw/master/mainsibaodian/image-2.6ikr1hi2bo.webp)
 
 **性能瓶颈分析**：
 -   **CPU 密集型**：动画的每一帧，JavaScript 都需要遍历所有粒子，计算新位置，然后通过 `ctx.arc()` 和 `ctx.fill()` 向浏览器发出成千上万个独立的绘图命令。
@@ -231,7 +231,7 @@ WebGL 的实现要复杂得多，但其核心思想是 **将数据和计算逻�
 </html>
 ```
 
-[![alt text](image-3.png)](https://github.com/dushenyan/picx-images-hosting/raw/master/mainsibaodian/image-3.6ikr1hi2bp.webp)
+![image-3.png](https://github.com/dushenyan/picx-images-hosting/raw/master/mainsibaodian/image-3.6ikr1hi2bp.webp)
 
 **高性能原理分析**：
 -   **数据驱动与并行计算**：我们将所有粒子的初始位置、大小、颜色等属性一次性打包并上传到GPU的缓冲区中。在动画循环中，我们不再用JS逐个更新粒子状态，而是通过一个统一的 `u_time` 变量，在**顶点着色器**中利用数学公式并行地为所有顶点计算位移。GPU拥有数百个核心，可以同时处理所有顶点的计算，这是速度飞跃的关键。
