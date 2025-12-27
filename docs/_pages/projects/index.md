@@ -3,6 +3,7 @@ layoutClass: nav-layout
 sidebar: false
 editLink: false
 footer: false
+aside: false
 ---
 
 <script setup>
