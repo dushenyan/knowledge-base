@@ -436,6 +436,12 @@
         "metadata": {},
         "link": "%2Fdocs%2FJavaScript%2F%E8%8E%B7%E5%8F%96%20JavaScript%20%E5%AE%9E%E4%BE%8B%E5%AF%B9%E8%B1%A1%E5%8E%9F%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95",
         "fileExtension": ".md"
+      },
+      {
+        "title": "闭包详解",
+        "metadata": {},
+        "link": "%2Fdocs%2FJavaScript%2F%E9%97%AD%E5%8C%85%E8%AF%A6%E8%A7%A3",
+        "fileExtension": ".md"
       }
     ],
     "link": "%2Fdocs%2FJavaScript"
