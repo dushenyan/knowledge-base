@@ -4,8 +4,9 @@ tags: ['useEmits']
 
 # Hooks工具函数
 
-## useEmits
-> 事件总线,用于组件之间的通信 
+### useEmits
+
+事件总线,用于组件之间的通信 
 
 1.封装hooks库
 ```ts

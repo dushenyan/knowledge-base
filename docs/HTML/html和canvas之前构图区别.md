@@ -61,7 +61,7 @@
 </html>
 ```
 
-[![alt text](image.png)](https://github.com/dushenyan/picx-images-hosting/raw/master/mainsibaodian/image.6f153rozly.webp)
+![alt text](https://github.com/dushenyan/picx-images-hosting/raw/master/mainsibaodian/image.6f153rozly.webp)
 
 **性能瓶颈分析**：
 - **DOM对象开销**：浏览器需要为这1000个`<div>`元素创建并维护1000个独立的DOM节点对象。每个对象都需要占用内存，并且浏览器需要持续跟踪它们的状态（样式、层级、事件监听等）。
@@ -120,7 +120,7 @@
 </html>
 ```
 
-[![alt text](image-1.png)](https://github.com/dushenyan/picx-images-hosting/raw/master/mainsibaodian/image-1.1hso9xb7sz.webp)
+![image-1.png](https://github.com/dushenyan/picx-images-hosting/raw/master/mainsibaodian/image-1.1hso9xb7sz.webp)
 
 **高性能原理分析**：
 - **极少的DOM开销**：整个场景只有一个`<canvas>` DOM元素。那1000个方块只是存储在JavaScript数组里的普通对象，浏览器不需要为它们创建和管理复杂的DOM节点，内存和管理开销大大降低。

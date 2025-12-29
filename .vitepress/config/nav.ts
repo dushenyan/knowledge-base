@@ -35,6 +35,7 @@ export const nav = [
   },
   {
     text: '技术集合',
-    items: getJiShuJiHe(),
+    activeMatch: '/docs/_pages/jishu',
+    link: '/docs/_pages/jishu/index',
   },
 ]
