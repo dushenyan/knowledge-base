@@ -17,5 +17,5 @@ dist-ssr
 *.log*
 
 .fmCache.json
-.docsTree.json
-
+docsTree.json
+docs/_pages/projects/data.ts
