@@ -7,6 +7,7 @@ export default (): UserConfigExport => {
   return {
     server: {
       port: 1216,
+      open: true,
     },
     optimizeDeps: {
       exclude: ['vitepress'],

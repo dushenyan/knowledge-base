@@ -144,6 +144,15 @@ export const NAV_DATA: NavData[] = [
   },
   {
     "icon": "",
+    "title": "picx-images-hosting",
+    "desc": "[PicX](https://github.com/XPoet/picx) is a simple and powerful image hosting tool. It supports image...",
+    "link": "vscode://file//Users/shenyandu/Desktop/emphasis/picx-images-hosting",
+    "remoteRepo": "https://github.com/dushenyan/picx-images-hosting.git",
+    "localPath": "/Users/shenyandu/Desktop/emphasis/picx-images-hosting",
+    "homepage": ""
+  },
+  {
+    "icon": "",
     "title": "pingduoduo-Ai-reply",
     "desc": "拼多多智能客服系统",
     "link": "vscode://file//Users/shenyandu/Desktop/emphasis/pingduoduo-Ai-reply",
