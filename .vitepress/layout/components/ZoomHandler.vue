@@ -22,6 +22,10 @@ onBeforeMount(() => {
 })
 </script>
 
+<template>
+  <div />
+</template>
+
 <style lang="scss">
 .medium-zoom-overlay {
   z-index: 1000;

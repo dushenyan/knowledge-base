@@ -3,11 +3,15 @@ import type { StyleValue } from 'vue'
 import type { SandpackPredefinedTemplate } from '../../types'
 import { sandpackTemplateOptions } from '@config/emnus'
 import { Edit } from '@element-plus/icons-vue'
-
 import { useDraggable } from '@vueuse/core'
-
-import { Sandbox } from 'vitepress-plugin-sandpack'
-import { computed, onMounted, onUnmounted, ref, watchEffect } from 'vue'
+import { ElMessage } from 'element-plus'
+import { computed, nextTick, onMounted, onUnmounted, ref, watch, watchEffect } from 'vue'
+import {
+  clearCurrentSandboxCode,
+  getSandboxCode,
+  saveSandboxCode,
+} from '../../utils/sandbox-db'
+import SandboxWrapper from './SandboxWrapper.vue'
 
 interface Props {
   modelValue?: boolean
@@ -26,6 +30,10 @@ const isMinimized = ref(false)
 const isResizing = ref(false)
 const position = ref({ x: window.innerWidth - 420, y: 100 })
 const size = ref({ width: 400, height: window.innerHeight * 0.6 })
+
+// 存储代码状态
+const savedCodes = ref<Record<string, string>>({})
+const isCodeLoaded = ref(false)
 
 // 获取窗口元素的引用
 const windowEl = ref<HTMLElement>()
@@ -99,18 +107,185 @@ function handleMaximize() {
 }
 
 function handleClose() {
+  // 关闭前保存当前代码
+  saveCurrentCode()
   emit('update:modelValue', false)
+}
+
+// 从数据库加载代码
+async function loadSavedCode() {
+  if (isCodeLoaded.value)
+    return
+
+  try {
+    const saved = await getSandboxCode()
+    if (saved) {
+      savedCodes.value = saved.codes
+      sandpackTemplateValue.value = saved.template as SandpackPredefinedTemplate
+
+      ElMessage({
+        message: '已恢复上次编辑的代码',
+        type: 'success',
+        duration: 2000,
+      })
+    }
+    isCodeLoaded.value = true
+  }
+  catch (error) {
+    console.error('Failed to load saved code:', error)
+  }
+}
+
+// 保存当前代码到数据库
+async function saveCurrentCode() {
+  try {
+    // 尝试从DOM手动获取编辑器中的代码
+    const codeFromDOM = getEditorCodeFromDOM()
+    if (codeFromDOM && Object.keys(codeFromDOM).length > 0) {
+      console.log('Got code from DOM:', codeFromDOM)
+      savedCodes.value = codeFromDOM
+      await saveSandboxCode(sandpackTemplateValue.value, codeFromDOM)
+      ElMessage({
+        message: '代码已保存',
+        type: 'success',
+        duration: 2000,
+      })
+    } else {
+      // 如果无法从DOM获取，使用现有保存的代码
+      await saveSandboxCode(sandpackTemplateValue.value, savedCodes.value)
+      ElMessage({
+        message: '代码已保存',
+        type: 'success',
+        duration: 2000,
+      })
+    }
+  }
+  catch (error) {
+    console.error('Failed to save code:', error)
+  }
+}
+
+// 从DOM中提取编辑器代码
+function getEditorCodeFromDOM(): Record<string, string> {
+  const files: Record<string, string> = {}
+  
+  try {
+    // 查找所有代码编辑器
+    const codeEditors = document.querySelectorAll('.sp-stack, .cm-editor')
+    console.log('Found code editors:', codeEditors)
+    
+    // 尝试获取每个编辑器的内容
+    codeEditors.forEach((editor, index) => {
+      // 查找编辑器内容区域
+      const contentElement = editor.querySelector('.cm-content, .CodeMirror-code, .cm-line')
+      if (contentElement && contentElement.textContent) {
+        // 默认文件名
+        let fileName = `File${index + 1}.js`
+        
+        // 尝试获取文件名（可能从标签页或标题中）
+        const tabElement = editor.querySelector('.sp-tab, [data-testid="file-tab"], .tab')
+        if (tabElement && tabElement.textContent) {
+          fileName = tabElement.textContent.trim()
+          if (!fileName.includes('.')) {
+            fileName = `${fileName}.js`
+          }
+        }
+        
+        files[fileName] = contentElement.textContent
+        console.log(`Extracted ${fileName}:`, `${contentElement.textContent?.substring(0, 50)}...`)
+      }
+    })
+    
+    // 如果没有找到编辑器，尝试其他方法
+    if (Object.keys(files).length === 0) {
+      // 查找所有可能包含代码的元素
+      const codeElements = document.querySelectorAll('pre, code, .cm-line')
+      codeElements.forEach((element, index) => {
+        if (element.textContent && element.textContent.trim()) {
+          files[`Code${index + 1}.txt`] = element.textContent.trim()
+        }
+      })
+    }
+  } catch (error) {
+    console.error('Error getting code from DOM:', error)
+  }
+  
+  return files
+}
+
+// 清除当前页面的代码
+async function handleClearCode() {
+  try {
+    await clearCurrentSandboxCode()
+    savedCodes.value = {}
+    ElMessage({
+      message: '已清除保存的代码',
+      type: 'info',
+      duration: 2000,
+    })
+  }
+  catch (error) {
+    console.error('Failed to clear code:', error)
+  }
+}
+
+// 处理SandboxWrapper的文件更新事件
+async function handleFilesUpdate(files: Record<string, string>) {
+  console.log('DraggableSandbox received files update:', files)
+  console.log('Files keys:', Object.keys(files))
+  
+  savedCodes.value = files
+  try {
+    await saveSandboxCode(sandpackTemplateValue.value, files)
+  }
+  catch (error) {
+    console.error('Failed to save updated code:', error)
+  }
 }
 
 // 监听全局鼠标移动和释放事件
 onMounted(() => {
   window.addEventListener('mousemove', handleResize)
   window.addEventListener('mouseup', endResize)
+
+  // 当窗口打开时，加载保存的代码
+  if (props.modelValue) {
+    nextTick(() => {
+      loadSavedCode()
+    })
+  }
 })
 
 onUnmounted(() => {
   window.removeEventListener('mousemove', handleResize)
   window.removeEventListener('mouseup', endResize)
+
+  // 组件卸载前保存代码
+  saveCurrentCode()
+})
+
+// 监听窗口打开和关闭
+watch(() => props.modelValue, (newValue) => {
+  if (newValue) {
+    nextTick(() => {
+      loadSavedCode()
+    })
+  }
+  else {
+    saveCurrentCode()
+  }
+})
+
+// 监听模板变化
+watch(sandpackTemplateValue, () => {
+  // 当模板改变时，保存代码
+  saveCurrentCode()
+})
+
+// 监听页面路由变化，在路由变化时保存代码
+watch(() => window.location.pathname, () => {
+  saveCurrentCode()
+  isCodeLoaded.value = false // 重置加载状态，以便在新页面重新加载
 })
 
 // 监听窗口大小变化，防止窗口超出边界
@@ -172,16 +347,35 @@ watchEffect(() => {
             {{ item }}
           </el-option>
         </el-select>
+
+        <el-button
+          type="primary"
+          size="small"
+          style="margin-left: 10px;"
+          @click="saveCurrentCode"
+        >
+          保存代码
+        </el-button>
+
+        <el-button
+          type="info"
+          size="small"
+          @click="handleClearCode"
+        >
+          清除代码
+        </el-button>
       </div>
 
       <div class="sandbox-wrapper">
         <ClientOnly>
-          <Sandbox
+          <SandboxWrapper
             :template="sandpackTemplateValue"
             :autorun="false"
-            show-line-numbers
-            show-refresh-button
-            show-console-button
+            :show-line-numbers="true"
+            :show-refresh-button="true"
+            :show-console-button="true"
+            :files="savedCodes"
+            @update:files="handleFilesUpdate"
           />
         </ClientOnly>
       </div>
