@@ -22,21 +22,21 @@ const formatTitle = computed(() => {
   return props.title ? props.title.replace(/\s+/g, '-').toLowerCase() : ''
 })
 
-const getItemCount = (item: DocsTreeItem): number => {
+function getItemCount(item: DocsTreeItem): number {
   const count = item.items?.length || item.children?.length || 0
   return count
 }
 
 // 处理卡片点击事件，打开侧边栏并设置选中的分类
-const handleClick = (module: DocsTreeItem, event: MouseEvent) => {
+function handleClick(module: DocsTreeItem, event: MouseEvent) {
   event.preventDefault()
-  
+
   // 打开侧边栏并设置当前分类
   appStore.openListDrawer(module.title)
-  
+
   // 触发全局事件，让layout组件知道需要显示侧边栏
   const customEvent = new CustomEvent('toggle-list-drawer', {
-    detail: { show: true, category: module.title }
+    detail: { show: true, category: module.title },
   })
   window.dispatchEvent(customEvent)
 }
@@ -50,9 +50,9 @@ const handleClick = (module: DocsTreeItem, event: MouseEvent) => {
     <div
       v-for="module in props.modules"
       :key="module.title"
-      @click="handleClick(module, $event)"
       class="jishu-card"
       :class="{ 'has-items': getItemCount(module) > 0 }"
+      @click="handleClick(module, $event)"
     >
       <div class="jishu-card-header">
         <span class="jishu-card-title">
@@ -128,6 +128,7 @@ const handleClick = (module: DocsTreeItem, event: MouseEvent) => {
   color: inherit;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 
   &::before {
     content: '';
@@ -239,5 +240,4 @@ html.dark {
     }
   }
 }
-
 </style>

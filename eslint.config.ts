@@ -15,5 +15,6 @@ export default antfu({
 }, {
   rules: {
     'no-console': 'off',
+    'vue/valid-template-root': 'off',
   },
 })
