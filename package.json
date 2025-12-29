@@ -17,6 +17,7 @@
     "@element-plus/icons-vue": "^2.3.2",
     "@mdit-vue/shared": "^2.1.4",
     "@supabase/supabase-js": "^2.57.0",
+    "@vueuse/core": "^14.1.0",
     "canvas-confetti": "^1.9.3",
     "dayjs": "^1.11.13",
     "element-plus": "^2.10.3",

@@ -11,17 +11,19 @@ aside: false
 import docsTree from '@config/docsTree.json'
 import { computed, ref } from 'vue'
 
-const docsTreeRef = ref<DocsTreeItem[]>(docsTree)
-
 interface DocsTreeItem {
   title: string
   items?: DocsTreeItem[]
   path?: string
 }
+
+const ignoreDocs = ['_pages']
+
+const filterDocsTree = computed(() => docsTree.filter(item => !ignoreDocs.includes(item.title)))
+
 </script>
 
-<JishuCard title="Technology" :modules="docsTreeRef" />
+<JishuCard title="Technology" :modules="filterDocsTree" />
 
 <style src="./index.scss"></style>
 
-<br />

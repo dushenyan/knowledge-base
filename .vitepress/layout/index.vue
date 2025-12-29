@@ -1,220 +1,58 @@
 <script setup lang="ts">
-import type { Zoom } from 'medium-zoom'
-import type { SandpackPredefinedTemplate } from '../types'
-import { sandpackTemplateOptions } from '@config/emnus'
-import { ArrowUpBold, Edit, List } from '@element-plus/icons-vue'
-import HomeUnderline from '@theme/components/HomeUnderline'
-import { EmitType, useEmits } from '@theme/hooks/useEmits'
-import confetti from 'canvas-confetti'
-import mediumZoom from 'medium-zoom'
-import { inBrowser, onContentUpdated, useData } from 'vitepress'
-import { Sandbox } from 'vitepress-plugin-sandpack'
+import { ArrowUpBold } from '@element-plus/icons-vue'
 import Theme from 'vitepress/theme'
-// 具体使用参见：https://vitepress.vuejs.org/guide/theme-introduction#extending-the-default-theme
-import { computed, createApp, nextTick, onBeforeMount, ref, watch } from 'vue'
+import { ref } from 'vue'
 
-import { useAppStore } from '@/stores'
-
-// export const injectKey = Symbol('Layout')
+// 导入我们创建的组件
+import ConfettiEffect from './components/ConfettiEffect.vue'
+import DraggableSandbox from './components/DraggableSandbox.vue'
+import HomeUnderlineWrapper from './components/HomeUnderlineWrapper.vue'
+import SandboxDragButton from './components/SandboxDragButton.vue'
+import TechnologyDrawer from './components/TechnologyDrawer.vue'
+import ZoomHandler from './components/ZoomHandler.vue'
 
 const { Layout } = Theme
-const { frontmatter: fm } = useData()
-let zoom: Zoom
 
-onContentUpdated(() => {
-  if (!zoom)
-    return
-  zoom.detach('.VPDoc img')
-  zoom.attach('.VPDoc img')
-})
-
-onBeforeMount(() => {
-  zoom = mediumZoom(undefined, {
-    background: 'rgba(0, 0, 0, .75)',
-  })
-})
-
-function performDOMOperations() {
-  nextTick(() => {
-    // 先检查是否在浏览器环境
-    if (inBrowser) {
-      // 查找目标节点
-      const oldNode = window.document.querySelector('.VPHero .tagline')
-      if (oldNode && oldNode.parentNode) {
-        // 创建并挂载应用
-        const app = createApp(HomeUnderline, {
-          fm: fm.value,
-        })
-
-        // 替换节点
-        app.mount(oldNode)
-        oldNode.parentNode.replaceChild(app._container as Node, oldNode)
-      }
-    }
-  })
-}
-
-watch(
-  fm,
-  () => {
-    performDOMOperations()
-  },
-  { immediate: true, deep: true },
-)
-
-if (inBrowser) {
-  /* 纸屑 */
-  confetti({
-    particleCount: 100,
-    spread: 170,
-    origin: { y: 0.6 },
-  })
-}
-
-const showEditDrawer = ref(false)
-
-const showListDrawer = ref(false)
-
-const appStore = useAppStore()
-
-function handleClick(e: MouseEvent, type: string) {
-  e.preventDefault()
-  if (type === 'list') {
-    showListDrawer.value = !showListDrawer.value
-    appStore.setListDrawerVisible(showListDrawer.value)
-    useEmits({
-      name: EmitType.ListDrawerClose,
-      onCallback: (val: any) => {
-        console.log(val)
-        showListDrawer.value = false
-        appStore.setListDrawerVisible(false)
-      },
-    })
-  }
-  else if (type === 'edit') {
-    showEditDrawer.value = !showEditDrawer.value
-  }
-  else if (type === 'back') {
-    if (inBrowser) {
-      window.history.back()
-    }
-  }
-}
-
-// 监听全局事件来控制侧边栏
-if (inBrowser) {
-  window.addEventListener('toggle-list-drawer', (event: any) => {
-    const { show, category } = event.detail || {}
-    showListDrawer.value = show || false
-    appStore.setListDrawerVisible(show || false)
-    
-    if (category) {
-      appStore.setSelectedCategory(category)
-    }
-  })
-}
-
-// 监听store中的侧边栏状态变化
-watch(() => appStore.getListDrawerVisible, (visible) => {
-  showListDrawer.value = visible
-})
-
-const activeName = computed(() => appStore.getActiveName)
-
-const sandpackTemplateValue = ref<SandpackPredefinedTemplate>('vite')
+// 控制抽屉状态
+const listDrawerVisible = ref(false)
+const editDrawerVisible = ref(false)
 </script>
 
 <template>
-  <Suspense>
-    <Layout v-bind="$attrs">
-      <template #doc-top>
-        <div class="fixed-edit-btn" style="bottom: 160px;" @click="handleClick($event, 'list')">
+  <Layout v-bind="$attrs">
+    <template #layout-top>
+      <!-- 纸屑效果 -->
+      <ConfettiEffect />
+
+      <!-- 图片缩放处理 -->
+      <ZoomHandler />
+
+      <!-- 主页下划线处理 -->
+      <HomeUnderlineWrapper />
+
+      <!-- 技术文档列表 -->
+      <TechnologyDrawer
+        v-model="listDrawerVisible"
+      />
+
+      <!-- 可拖拽编辑器 -->
+      <SandboxDragButton
+        v-model="editDrawerVisible"
+      />
+
+      <!-- 可拖拽编辑器窗口 -->
+      <DraggableSandbox
+        v-model="editDrawerVisible"
+      />
+
+      <!-- 返回顶部按钮 -->
+      <el-backtop>
+        <div style="color: var(--vp-c-brand);">
           <el-icon size="24">
-            <List />
+            <ArrowUpBold />
           </el-icon>
         </div>
-        <div class="fixed-edit-btn" @click="handleClick($event, 'edit')">
-          <el-icon size="24">
-            <Edit />
-          </el-icon>
-        </div>
-        <el-drawer
-          v-model="showEditDrawer" :with-header="false" append-to-body :close-on-click-modal="false"
-          size="100%"
-        >
-          <div class="sandbox-container">
-            <div class="sandbox-title">
-              在线编辑
-              <el-select v-model="sandpackTemplateValue" placeholder="Select" style="width: 240px">
-                <el-option v-for="(item, index) in sandpackTemplateOptions" :key="index" :label="item" :value="item">
-                  {{ item }}
-                </el-option>
-              </el-select>
-            </div>
-            <div class="sandbox-content">
-              <div class="sandbox">
-                <ClientOnly>
-                  <Sandbox
-                    :template="sandpackTemplateValue" :autorun="false" show-line-numbers show-refresh-button
-                    show-console-button
-                  />
-                </ClientOnly>
-              </div>
-            </div>
-          </div>
-        </el-drawer>
-        <el-drawer v-model="showListDrawer" :with-header="false" append-to-body size="60%">
-          <div class="list-container">
-            <PageTable :active-name="activeName" />
-          </div>
-        </el-drawer>
-      </template>
-      <template #layout-top>
-        <!-- <LockScreen /> -->
-        <el-backtop>
-          <div style="color: var(--vp-c-brand);">
-            <el-icon size="24">
-              <ArrowUpBold />
-            </el-icon>
-          </div>
-        </el-backtop>
-      </template>
-    </Layout>
-  </Suspense>
+      </el-backtop>
+    </template>
+  </Layout>
 </template>
-
-<style lang="scss">
-.medium-zoom-overlay {
-  z-index: 1000
-}
-
-.medium-zoom-image {
-  z-index: 2000
-}
-
-.fixed-edit-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  right: 40px;
-  bottom: 100px;
-  height: 40px;
-  width: 40px;
-  background-color: var(--el-bg-color-overlay);
-  box-shadow: var(--el-box-shadow-lighter);
-  text-align: center;
-  line-height: 40px;
-  color: var(--vp-c-brand);
-  cursor: pointer;
-  z-index: 9999;
-  border-radius: 50%;
-}
-
-.sandbox-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-</style>
