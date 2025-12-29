@@ -5,8 +5,9 @@ import { ref } from 'vue'
 
 // 导入我们创建的组件
 import ConfettiEffect from './components/ConfettiEffect.vue'
+import DraggableSandbox from './components/DraggableSandbox.vue'
 import HomeUnderlineWrapper from './components/HomeUnderlineWrapper.vue'
-import SandboxDrag from './components/SandboxDrag.vue'
+import SandboxDragButton from './components/SandboxDragButton.vue'
 import TechnologyDrawer from './components/TechnologyDrawer.vue'
 import ZoomHandler from './components/ZoomHandler.vue'
 
@@ -19,7 +20,6 @@ const editDrawerVisible = ref(false)
 
 <template>
   <Layout v-bind="$attrs">
-    <template #doc-top />
     <template #layout-top>
       <!-- 纸屑效果 -->
       <ConfettiEffect />
@@ -35,8 +35,13 @@ const editDrawerVisible = ref(false)
         v-model="listDrawerVisible"
       />
 
-      <!-- 运行器模块 -->
-      <SandboxDrag
+      <!-- 可拖拽编辑器 -->
+      <SandboxDragButton
+        v-model="editDrawerVisible"
+      />
+
+      <!-- 可拖拽编辑器窗口 -->
+      <DraggableSandbox
         v-model="editDrawerVisible"
       />
 

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { List } from '@element-plus/icons-vue'
+
 import { EmitType, useEmits } from '@theme/hooks/useEmits'
 import { inBrowser } from 'vitepress'
-
 import { computed, watch } from 'vue'
 import { useAppStore } from '@/stores'
 
@@ -13,6 +13,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   modelValue: false,
 })
+
 const emit = defineEmits<{
   'update:modelValue': [value: boolean]
 }>()
@@ -38,11 +39,10 @@ function handleClick(e: MouseEvent) {
 }
 
 // 双向绑定的计算属性
-const listDrawerModel = computed({
+const drawerModel = computed({
   get: () => props.modelValue,
   set: (value: boolean) => {
     emit('update:modelValue', value)
-    appStore.setListDrawerVisible(value)
   },
 })
 
@@ -66,29 +66,32 @@ watch(() => appStore.getListDrawerVisible, (visible) => {
 </script>
 
 <template>
-  <div class="fixed-edit-btn" style="bottom: 160px;" @click="handleClick($event)">
+  <div class="fixed-list-btn" @click="handleClick($event)">
     <el-icon size="24">
       <List />
     </el-icon>
   </div>
-  <Teleport to="body">
-    <el-drawer v-model="listDrawerModel" :with-header="false" size="60%">
-      <div class="list-container">
-        <h2>{{ activeName }}</h2>
-        <PageTable :active-name="activeName" />
-      </div>
-    </el-drawer>
-  </Teleport>
+  <el-drawer
+    v-model="drawerModel"
+    :with-header="false"
+    append-to-body
+    size="60%"
+  >
+    <div class="list-container">
+      <h3>{{ activeName }}</h3>
+      <PageTable :active-name="activeName" />
+    </div>
+  </el-drawer>
 </template>
 
 <style lang="scss" scoped>
-.fixed-edit-btn {
+.fixed-list-btn {
   display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
   right: 40px;
-  bottom: 100px;
+  bottom: 160px;
   height: 40px;
   width: 40px;
   background-color: var(--el-bg-color-overlay);
@@ -99,5 +102,27 @@ watch(() => appStore.getListDrawerVisible, (visible) => {
   cursor: pointer;
   z-index: 9999;
   border-radius: 50%;
+  transition: all 0.3s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--el-box-shadow);
+  }
+}
+
+.list-container {
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: var(--vp-c-brand);
+  font-weight: 600;
+  font-size: 18px;
+  border-bottom: 1px solid var(--vp-c-border);
+  padding-bottom: 10px;
 }
 </style>
