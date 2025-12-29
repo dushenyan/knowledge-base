@@ -21,7 +21,7 @@ const emit = defineEmits<{
   'update:modelValue': [value: boolean]
 }>()
 
-const sandpackTemplateValue = ref<SandpackPredefinedTemplate>('vite')
+const sandpackTemplateValue = ref<SandpackPredefinedTemplate>('static')
 const isMinimized = ref(false)
 const isResizing = ref(false)
 const position = ref({ x: window.innerWidth - 420, y: 100 })
