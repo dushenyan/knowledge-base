@@ -2,6 +2,7 @@
 import { List } from '@element-plus/icons-vue'
 
 import { EmitType, useEmits } from '@theme/hooks/useEmits'
+import { useMediaQuery } from '@vueuse/core'
 import { inBrowser } from 'vitepress'
 import { computed, watch } from 'vue'
 import { useAppStore } from '@/stores'
@@ -21,6 +22,7 @@ const emit = defineEmits<{
 const appStore = useAppStore()
 
 const activeName = computed(() => appStore.getActiveName)
+const isMobile = useMediaQuery('(max-width: 768px)')
 
 // 处理按钮点击事件
 function handleClick(e: MouseEvent) {
@@ -75,7 +77,7 @@ watch(() => appStore.getListDrawerVisible, (visible) => {
     v-model="drawerModel"
     :with-header="false"
     append-to-body
-    size="60%"
+    :size="isMobile ? '100%' : '60%'"
   >
     <div class="list-container">
       <h3>{{ activeName }}</h3>

@@ -49,7 +49,8 @@ function navigateToPage(path?: string) {
 watch(() => props.activeName, (val) => {
   if (val) {
     _activeName.value = val
-  } else {
+  }
+  else {
     // 如果没有传入activeName，则使用store中的值
     const storeActiveName = appStore.getActiveName
     if (storeActiveName) {
@@ -109,7 +110,6 @@ watch(() => _activeName.value, () => {
 
 <style scoped lang="scss">
 .page-table {
-  margin: 60px auto;
   max-width: 85vw;
 
   h1 {
